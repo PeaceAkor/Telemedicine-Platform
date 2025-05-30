@@ -97,7 +97,7 @@ const getProfile = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   try {
-    const { name, phone, address, dob, gender } = req.body;
+    const { name, phone, address, dob, gender, about } = req.body;
     const imageFile = req.file;
     const userId = req.user._id;
 
@@ -111,6 +111,7 @@ const updateProfile = async (req, res) => {
       address: typeof address === "string" ? JSON.parse(address) : address,
       dob,
       gender,
+      about,
     };
 
     if (imageFile) {

@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/logo1.jpg";
+import logo from "../assets/logo1.png";
 import profile from "../assets/profile.jpg";
 import dropdown_icon from "../assets/assets_frontend/dropdown_icon.svg";
 import menu_icon from "../assets/assets_frontend/menu_icon.svg";
@@ -28,7 +28,7 @@ const Navbar = () => {
     <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-gray-400">
       <img
         onClick={() => navigate("/")}
-        className="w-10 cursor-pointer"
+        className="w-14 cursor-pointer"
         src={logo}
         alt="logo"
       />

@@ -126,39 +126,6 @@ const DoctorDashboard = () => {
               </div>
             ))}
           </div>
-          <div className="mt-10 p-4 border rounded">
-            <p className="font-semibold mb-2">Live Chat</p>
-            <div className="h-40 overflow-y-auto bg-gray-100 p-2 rounded">
-              {(Array.isArray(messages) ? messages : []).map((msg, idx) => (
-                <p
-                  key={idx}
-                  className={`${
-                    msg.senderId === dashData.doctorId
-                      ? "text-right"
-                      : "text-left"
-                  } mb-1`}
-                >
-                  <span className="inline-block bg-blue-100 p-1 rounded">
-                    {msg.content}
-                  </span>
-                </p>
-              ))}
-            </div>
-            <div className="flex mt-2 gap-2">
-              <input
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                className="flex-1 border px-2 py-1 rounded"
-                placeholder="Type a message"
-              />
-              <button
-                onClick={sendMessage}
-                className="bg-blue-500 text-white px-3 py-1 rounded"
-              >
-                Send
-              </button>
-            </div>
-          </div>
         </div>
       </div>
     )

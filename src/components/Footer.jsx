@@ -1,46 +1,105 @@
 import React from "react";
-import logo from "../assets/logo1.jpg";
+import logo from "../assets/logo1.png";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaInstagram,
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="md:mx-10">
-      <div className="flex flex-col sm:grid grid-cols-[1.5fr_1fr_1fr] gap-5 my-10 mt-40 text-sm">
-        {/*...left section*/}
-        <div>
-          <img className="mb-3 w-30" src={logo} alt="" />
-          <p className="w-full md:w-2/3 text-gray-600 leading-6">
+    <footer className="bg-white px-4 md:px-10 py-10 mt-30 border-t text-gray-700">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-30 items-start">
+        {/* Left: Logo and description */}
+        <div className="space-y-1">
+          <img src={logo} alt="MedLink Logo" className="w-32" />
+          <p className="text-sm leading-5 text-gray-600 max-w-sm">
             Connecting patients with trusted healthcare professionals anytime,
-            anywhere. Our telemedicine platform ensures convenient, secure, and
-            accessible virtual consultations for better health outcomes.
+            anywhere. Our telemedicine platform ensures conveniency, and
+            security, for better health outcomes.
           </p>
+          {/* Social Media Icons */}
+          <div className="flex gap-3 mt-3 text-blue-500">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaFacebookF
+                className="hover:text-blue-700 transition"
+                size={18}
+              />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaTwitter className="hover:text-blue-700 transition" size={18} />
+            </a>
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaLinkedinIn
+                className="hover:text-blue-700 transition"
+                size={18}
+              />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FaInstagram
+                className="hover:text-blue-700 transition"
+                size={18}
+              />
+            </a>
+          </div>
         </div>
-        {/*...middle section*/}
-        <div>
-          <p className="text-xl font-medium mb-5">COMPANY</p>
-          <ul className="flex flex-col gap-2 text-gray-600">
-            <li>HOME</li>
-            <li>About us</li>
-            <li>Contact us</li>
-            <li>Privacy Policy</li>
+
+        {/* Middle: Company links */}
+        <div className="space-y-3">
+          <h3 className="text-lg font-semibold text-gray-800">Company</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li className="hover:text-blue-500 cursor-pointer">Home</li>
+            <li className="hover:text-blue-500 cursor-pointer">About Us</li>
+            <li className="hover:text-blue-500 cursor-pointer">Contact Us</li>
+            <li className="hover:text-blue-500 cursor-pointer">
+              Privacy Policy
+            </li>
           </ul>
         </div>
-        {/*...right section*/}
-        <div>
-          <p className="text-xl font-medium mb-5">Get in Touch</p>
-          <ul className="flex flex-col gap-2 text-gray-600">
-            <li>+2347013963735</li>
-            <li>raphealpeace85@gmail.com</li>
+
+        {/* Right: Contact info */}
+        <div className="space-y-5">
+          <h3 className="text-lg font-semibold text-gray-800">Get in Touch</h3>
+          <ul className="space-y-2 text-sm text-gray-600">
+            <li>
+              <a href="tel:+2347013963735" className="hover:text-blue-500">
+                +234 701 396 3735
+              </a>
+            </li>
+            <li>
+              <a
+                href="mailto:raphealpeace85@gmail.com"
+                className="hover:text-blue-500"
+              >
+                raphealpeace85@gmail.com
+              </a>
+            </li>
           </ul>
         </div>
       </div>
-      {/*..copywritetext..*/}
-      <div>
-        <hr />
-        <p className="py-5 text-sm text-center">
-          Copywrite 2025@ MedLink All Right Reserved
-        </p>
+
+      {/* Divider and copyright */}
+      <div className="mt-10 border-t pt-5 text-center text-xs text-gray-500">
+        © 2025 MedLink. All rights reserved.
       </div>
-    </div>
+    </footer>
   );
 };
 

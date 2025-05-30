@@ -13,7 +13,7 @@ const Header = () => {
           With Trusted Doctors
         </p>
         <div className="flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light">
-          <img className="w-28" src={group_profiles} alt="Group Profiles" />
+          <img className="w-38" src={group_profiles} alt="Group Profiles" />
           <p>
             Simple browse through our extensive list of trusted doctors,{" "}
             <br className="hidden sm:block" />
@@ -32,7 +32,7 @@ const Header = () => {
       {/*.....right side.....*/}
       <div className="md:w-1/2 relative">
         <img
-          className="w-full md:absolute bottom-0 h-auto rounded-lg"
+          className="w-full max-w-[500px] md:absolute bottom-0 h-auto rounded-lg"
           src={header_image}
           alt="Header Image"
         />

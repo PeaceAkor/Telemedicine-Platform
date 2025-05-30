@@ -1,101 +1,118 @@
 import React, { useContext, useState } from "react";
-import { assets } from "../assets/assets";
-import { AdminContext } from "../context/AdminContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { AdminContext } from "../context/AdminContext";
 import { DoctorContext } from "../context/DoctorContext";
 
 const Login = () => {
-  const [state, setState] = useState("Admin");
+  const [role, setRole] = useState("Admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { setAToken, backendUrl } = useContext(AdminContext);
+  const { backendUrl, setAToken } = useContext(AdminContext);
   const { setDToken } = useContext(DoctorContext);
 
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
     try {
-      if (state === "Admin") {
-        const { data } = await axios.post(backendUrl + `/api/admin/login`, {
-          email,
-          password,
-        });
-        if (data.success) {
+      const endpoint =
+        role === "Admin" ? "/api/admin/login" : "/api/doctor/login";
+
+      const { data } = await axios.post(backendUrl + endpoint, {
+        email,
+        password,
+      });
+
+      if (data.success) {
+        if (role === "Admin") {
           localStorage.setItem("aToken", data.token);
           setAToken(data.token);
         } else {
-          toast.error(data.message);
-        }
-      } else {
-        const { data } = await axios.post(backendUrl + "/api/doctor/login", {
-          email,
-          password,
-        });
-        if (data.success) {
           localStorage.setItem("aDoken", data.token);
           setDToken(data.token);
-          console.log(data.token);
-        } else {
-          toast.error(data.message);
         }
+      } else {
+        toast.error(data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Login failed. Try again.");
+    }
   };
 
   return (
-    <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
-      <div className="flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-[#SESESE] text-sm shadow-lg">
-        <p className="text-2xl font-semibold m-auto">
-          <span className="text-blue-500">{state}</span>Login
-        </p>
-        <div className="w-full">
-          <p>Email</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+      <form
+        onSubmit={onSubmitHandler}
+        className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-6"
+      >
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-gray-800">{role} Login</h2>
+          <p className="text-sm text-gray-500">
+            Please enter your credentials to continue
+          </p>
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-600">
+            Email
+          </label>
           <input
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            className="border border-[#DADADA] rounded w-full p-2 mt-1"
             type="email"
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="you@example.com"
+            className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-        <div className="w-full">
-          <p>Password</p>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-600">
+            Password
+          </label>
           <input
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            className="border border-[#DADADA] rounded w-full p-2 mt-1"
             type="password"
             required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="••••••••"
+            className="mt-1 block w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>
-        <button className="bg-blue-500 text-white w-full py-2 rounded-md text-base">
+
+        <button
+          type="submit"
+          className="w-full py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-all"
+        >
           Login
         </button>
-        {state === "Admin" ? (
-          <p>
-            Doctor Login?{" "}
-            <span
-              className="text-blue-500 underline cursor-pointer"
-              onClick={() => setState("Doctor")}
-            >
-              Click here
-            </span>
-          </p>
-        ) : (
-          <p>
-            Admin Login?{" "}
-            <span
-              className="text-blue-500 underline cursor-pointer"
-              onClick={() => setState("Admin")}
-            >
-              Click here
-            </span>
-          </p>
-        )}
-      </div>
-    </form>
+
+        <p className="text-center text-sm text-gray-500">
+          {role === "Admin" ? (
+            <>
+              Doctor Login?{" "}
+              <span
+                onClick={() => setRole("Doctor")}
+                className="text-blue-600 hover:underline cursor-pointer font-medium"
+              >
+                Click here
+              </span>
+            </>
+          ) : (
+            <>
+              Admin Login?{" "}
+              <span
+                onClick={() => setRole("Admin")}
+                className="text-blue-600 hover:underline cursor-pointer font-medium"
+              >
+                Click here
+              </span>
+            </>
+          )}
+        </p>
+      </form>
+    </div>
   );
 };
+
 export default Login;
